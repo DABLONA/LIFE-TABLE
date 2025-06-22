@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مائدة الحياة | وجبتك علاجك</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: #e8f6f3;
+            color: #1b3c34;
+        }
+        nav {
+            background-color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1b3c34;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            cursor: pointer;
+            color: #1b3c34;
+        }
+        nav ul li:hover {
+            color: #c9a336;
+        }
+        section {
+            display: none;
+            padding: 2rem;
+        }
+        section.active {
+            display: block;
+        }
+        .cta-button {
+            background-color: #c9a336;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            cursor: pointer;
+        }
+        input, select, textarea {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #fff;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">مائدة الحياة</div>
+        <ul>
+            <li onclick="showSection('home')">الرئيسية</li>
+            <li onclick="showSection('menu')">قائمة الطعام</li>
+            <li onclick="showSection('order')">طلب وجبة</li>
+            <li onclick="showSection('recommendation')">توصية غذائية</li>
+            <li onclick="showSection('about')">من نحن</li>
+            <li onclick="showSection('contact')">اتصل بنا</li>
+        </ul>
+    </nav>
+
+    <section id="home" class="active">
+        <h1>وجبتك علاجك</h1>
+        <p>مطعم محلي مخصص لمرضى الكلى في منطقة تيارت، يقدم خيارات غذائية صحية ولذيذة.</p>
+        <button class="cta-button">ابدأ الآن</button>
+    </section>
+
+    <section id="menu">
+        <h2>قائمة الطعام</h2>
+        <ul>
+            <li>🍲 وجبات منخفضة الصوديوم</li>
+            <li>🥦 وجبات منخفضة البروتين</li>
+            <li>🐟 وجبات خاصة للغسيل الكلوي</li>
+        </ul>
+    </section>
+
+    <section id="order">
+        <h2>طلب وجبة مخصصة</h2>
+        <form onsubmit="event.preventDefault(); alert('تم إرسال الطلب بنجاح!');">
+            <label for="name">الاسم الكامل:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="phone">رقم الهاتف:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <label for="type">نوع النظام الغذائي:</label>
+            <select id="type" name="type">
+                <option>منخفض الصوديوم</option>
+                <option>منخفض البروتين</option>
+                <option>مناسب للغسيل الكلوي</option>
+            </select>
+            <label for="notes">ملاحظات إضافية:</label>
+            <textarea id="notes" name="notes" rows="3"></textarea>
+            <button class="cta-button" type="submit">أرسل الطلب</button>
+        </form>
+    </section>
+
+    <section id="recommendation">
+        <h2>توصية غذائية ذكية</h2>
+        <form onsubmit="event.preventDefault(); recommendMeal();">
+            <label for="age">السن:</label>
+            <input type="number" id="age" name="age" required>
+            <label for="weight">الوزن (كغ):</label>
+            <input type="number" id="weight" name="weight" required>
+            <label for="condition">الحالة الصحية:</label>
+            <select id="condition" name="condition">
+                <option>غسيل كلوي</option>
+                <option>قصور كلوي خفيف</option>
+                <option>ارتفاع ضغط الدم</option>
+            </select>
+            <button class="cta-button" type="submit">احصل على التوصية</button>
+        </form>
+        <div id="recommendationResult" style="margin-top:1rem;font-weight:bold;"></div>
+    </section>
+
+    <section id="about">
+        <h2>من نحن</h2>
+        <p>مائدة الحياة هو مشروع ريادي صحي يهدف إلى تقديم وجبات غذائية مخصصة لفئة مرضى الكلى، بالاعتماد على وصفات علاجية مدروسة.</p>
+    </section>
+
+    <section id="contact">
+        <h2>اتصل بنا</h2>
+        <p>📞 الهاتف: 0123456789</p>
+        <p>📧 البريد الإلكتروني: info@maedat-alhayat.dz</p>
+    </section>
+
+    <footer>
+        &copy; 2025 مائدة الحياة - جميع الحقوق محفوظة
+    </footer>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function recommendMeal() {
+            const condition = document.getElementById('condition').value;
+            let recommendation = '';
+            if (condition === 'غسيل كلوي') {
+                recommendation = 'ننصح بوجبات منخفضة الفوسفور وغنية بالسعرات الحرارية.';
+            } else if (condition === 'قصور كلوي خفيف') {
+                recommendation = 'اختر وجبات قليلة البروتين وقليلة الصوديوم.';
+            } else {
+                recommendation = 'ينصح بتناول وجبات قليلة الملح والدهون المشبعة.';
+            }
+            document.getElementById('recommendationResult').textContent = recommendation;
+        }
+    </script>
+</body>
+</html>
