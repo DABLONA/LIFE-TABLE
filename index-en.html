@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maedat Alhayat | Your Meal is Your Medicine</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: #e8f6f3;
+            color: #1b3c34;
+        }
+        nav {
+            background-color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1b3c34;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            cursor: pointer;
+            color: #1b3c34;
+        }
+        nav ul li:hover {
+            color: #c9a336;
+        }
+        section {
+            display: none;
+            padding: 2rem;
+        }
+        section.active {
+            display: block;
+        }
+        .cta-button {
+            background-color: #c9a336;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            cursor: pointer;
+        }
+        input, select, textarea {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #fff;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Maedat Alhayat</div>
+        <ul>
+            <li onclick="showSection('home')">Home</li>
+            <li onclick="showSection('menu')">Menu</li>
+            <li onclick="showSection('order')">Order Meal</li>
+            <li onclick="showSection('recommendation')">Diet Recommendation</li>
+            <li onclick="showSection('about')">About Us</li>
+            <li onclick="showSection('contact')">Contact Us</li>
+        </ul>
+    </nav>
+
+    <section id="home" class="active">
+        <h1>Your Meal is Your Medicine</h1>
+        <p>A local restaurant in Tiaret dedicated to kidney patients, offering healthy and delicious meals.</p>
+        <button class="cta-button">ابدأ الآن</button>
+    </section>
+
+    <section id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li>🍲 Low Sodium Meals</li>
+            <li>🥦 Low Protein Meals</li>
+            <li>🐟 Dialysis-Friendly Meals</li>
+        </ul>
+    </section>
+
+    <section id="order">
+        <h2>Order Meal مخصصة</h2>
+        <form onsubmit="event.preventDefault(); alert('تم إرسال الطلب بنجاح!');">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <label for="type">Diet Type:</label>
+            <select id="type" name="type">
+                <option>منخفض الصوديوم</option>
+                <option>منخفض البروتين</option>
+                <option>مناسب للغسيل الكلوي</option>
+            </select>
+            <label for="notes">Additional Notes:</label>
+            <textarea id="notes" name="notes" rows="3"></textarea>
+            <button class="cta-button" type="submit">Submit Order</button>
+        </form>
+    </section>
+
+    <section id="recommendation">
+        <h2>Diet Recommendation ذكية</h2>
+        <form onsubmit="event.preventDefault(); recommendMeal();">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" required>
+            <label for="condition">Health Condition:</label>
+            <select id="condition" name="condition">
+                <option>Dialysis</option>
+                <option>Mild Renal Failure</option>
+                <option>High Blood Pressure</option>
+            </select>
+            <button class="cta-button" type="submit">Get Recommendation</button>
+        </form>
+        <div id="recommendationResult" style="margin-top:1rem;font-weight:bold;"></div>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Maedat Alhayat is a health-oriented project that aims to offer tailored meals for kidney patients based on well-studied therapeutic recipes.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>📞 Phone: 0123456789</p>
+        <p>📧 Email: info@maedat-alhayat.dz</p>
+    </section>
+
+    <footer>
+        &copy; 2025 Maedat Alhayat - All Rights Reserved
+    </footer>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function recommendMeal() {
+            const condition = document.getElementById('condition').value;
+            let recommendation = '';
+            if (condition === 'Dialysis') {
+                recommendation = 'We recommend meals low in phosphorus and rich in calories.';
+            } else if (condition === 'Mild Renal Failure') {
+                recommendation = 'Choose low protein and low sodium meals.';
+            } else {
+                recommendation = 'We advise consuming meals low in salt and saturated fats.';
+            }
+            document.getElementById('recommendationResult').textContent = recommendation;
+        }
+    </script>
+</body>
+</html>
